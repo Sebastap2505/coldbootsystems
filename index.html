@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cold Boot Systems</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/CHIP.svg">
+    <meta name="description" content="Soporte técnico profesional en Mérida. Diagnóstico, mantenimiento y optimización.">
+    <meta name="author" content="Ing. Sebastián Ayuso">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+
+        :root { 
+            --bg-dark: #050505; 
+            --gold-main: #d4af37; 
+            --gold-glow: rgba(212, 175, 55, 0.4); 
+            --text-light: #ffffff; 
+            --text-desc: #b0b0b0; 
+            --border-glass: rgba(255, 255, 255, 0.1); 
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --hero-bg: linear-gradient(180deg, rgba(15, 15, 15, 0.95) 0%, rgba(5, 5, 5, 0.98) 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; margin: 0; transition: background-color 0.3s, color 0.3s; }
+        
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
+        #main-content { position: relative; z-index: 2; width: 100%; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
+
+        /* 3. MENÚ */
+        .menu-btn { position: fixed; top: 25px; left: 25px; z-index: 1001; background: rgba(0,0,0,0.6); border: 1px solid var(--gold-main); color: var(--gold-main); padding: 10px 15px; border-radius: 8px; font-size: 1.5rem; cursor: pointer; backdrop-filter: blur(5px); }
+        .theme-btn { position: fixed; top: 25px; right: 25px; z-index: 1001; background: rgba(100,100,100,0.2); border: 1px solid var(--gold-main); padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(5px); font-size: 1.2rem; }
+        .menu { position: fixed; top: 0; left: 0; width: 280px; height: 100vh; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(20px); padding: 100px 30px; display: flex; flex-direction: column; gap: 25px; transform: translateX(-100%); transition: transform 0.4s ease; z-index: 1000; border-right: 1px solid var(--border-glass); }
+        .menu.active { transform: translateX(0); }
+        .menu a, .menu button { color: var(--text-light); text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1.1rem; background: none; border: none; text-align: left; cursor: pointer; transition: 0.3s; }
+        .menu a:hover, .menu button:hover { color: var(--gold-main); padding-left: 10px; }
+        .hero { min-height: 100vh; display: flex !important; flex-direction: column !important; justify-content: flex-start !important; align-items: center !important; padding-top: 10px !important; background: transparent; }
+        .hero-content { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 0; }
+        .brand { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: center !important; gap: 30px !important; margin-bottom: 40px !important; flex-wrap: wrap !important; }
+        
+        .logo { 
+            width: 170px !important; 
+            margin-bottom: 0 !important; 
+            margin-left: 40px !important; /* <-- LOGO MOVIDO */
+            filter: drop-shadow(0 0 30px rgba(212,175,55,0.4)); 
+            transition: transform 0.5s; 
+            flex-shrink: 0 !important; 
+        }
+        .logo:hover { transform: scale(1.1); }
+        
+        .brand-text { display: flex; flex-direction: column; align-items: flex-start; gap: 15px !important; }
+        
+        .brand-title { 
+            font-size: clamp(1.5rem, 4vw, 3rem) !important; 
+            line-height: 1 !important; 
+            margin: 0 !important; 
+        
+            margin-top: 30px !important;   
+            margin-left: -35px !important; 
+            
+            text-align: left !important; 
+            background: linear-gradient(180deg, #fff 20%, var(--gold-main) 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8)); 
+        }
+
+        .brand-subtitle {
+            font-family: 'Playfair Display', serif !important; font-style: italic; font-weight: 400;
+            color: var(--gold-main); font-size: 1.2rem; text-transform: none; letter-spacing: 0.5px;
+            margin-top: -10px !important; margin-bottom: 0; margin-left: -70px !important;
+            animation: breathing 4s ease-in-out infinite;
+        }
+        @keyframes breathing {
+            0% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+            50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+            100% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+        }
+        
+        .hero-description { 
+            width: 95% !important; max-width: 1400px !important; margin: 20px auto 50px !important; 
+            background: var(--hero-bg) !important; backdrop-filter: blur(10px) !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 16px !important; 
+            color: #d4af37 !important; text-shadow: 0 0 15px rgba(212, 175, 55, 0.3) !important; 
+            font-size: 1.15rem !important; line-height: 1.9 !important; text-align: center !important; padding: 40px 60px !important; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8) !important; transition: all 0.4s ease;
+            font-family: 'Montserrat', sans-serif !important; font-weight: 500;
+        }
+        .hero-description:hover { border-color: rgba(255, 255, 255, 0.3) !important; transform: translateY(-2px); }
+        .tech-images { padding-top: 0; margin-top: -100px; position: relative; z-index: 10; padding-left: 5%; padding-right: 5%; }
+        .tech-grid { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
+        .tech-item { display: flex; flex: 1; }
+        .tech-item:first-child { justify-content: flex-start; } .tech-item:nth-child(2) { justify-content: center; } .tech-item:last-child { justify-content: flex-end; }   
+        .tech-item img { height: 140px !important; width: auto; opacity: 1 !important; filter: none !important; transition: 0.3s; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); }
+        .tech-item img:hover { transform: scale(1.1); }
+
+        section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: var(--text-light); }
+        h2 span { color: var(--gold-main); }
+        
+        .services { display: grid; grid-template-columns: repeat(2, 1fr) !important; gap: 30px; max-width: 1000px; margin: auto; }
+        .card { background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; transition: 0.4s; text-align: center !important; }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold-main); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+        .card h3 { color: var(--gold-main) !important; font-size: 1.2rem; margin-bottom: 15px; display: flex; gap: 10px; align-items: center; justify-content: center !important; }
+        .card p { color: var(--text-desc); font-size: 0.95rem; }
+        
+
+        .comparison-title { 
+        text-align: center; 
+        color: var(--gold-main); 
+        padding: 0 15px !important;
+
+        margin-top: -80px !important; 
+        margin-bottom: 20px; 
+        ont-weight: 600; 
+        letter-spacing: 1px; 
+        transition: color 0.3s; 
+    }
+
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 70px; }
+        .comparison-item { text-align: center; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; border: 1px solid var(--border-glass); }
+        .comparison-item img { width: 80%; border-radius: 12px; display: block; margin: 0 auto; }
+        .bad { color: #ff5555; font-weight: 700; display: block; margin-top: 15px; }
+        .good { color: #00ff41; font-weight: 700; display: block; margin-top: 15px; }
+        .faq-section { display: none; opacity: 0; transition: opacity 0.5s ease; }
+        .faq-section.active { display: block; opacity: 1; animation: slideIn 0.5s ease forwards; }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        #faq h2 { font-family: 'Montserrat', sans-serif !important; font-weight: 800; font-style: normal; text-transform: uppercase; color: var(--text-light); text-shadow: none; font-size: 2.5rem; }
+        #faq h2 span { color: var(--gold-main); }
+
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-glass); margin-bottom: 15px; border-radius: 12px; overflow: hidden; }
+        .faq-question { width: 100%; padding: 20px 25px; background: none; border: none; text-align: left; color: var(--gold-main) !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 1.15rem; cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #ffffff; font-family: 'Montserrat', sans-serif !important; font-weight: 400; transition: 0.3s; line-height: 1.6; }
+        .faq-item.active .faq-answer { padding-bottom: 25px; max-height: 200px; }
+        .brands-section { width: 100vw !important; max-width: 100vw !important; position: relative; left: 50%; right: 50%; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden; padding: 30px 0; background: rgba(0, 0, 0, 0.9); border-top: 1px solid var(--border-glass); }
+        .brands-track { display: flex; gap: 80px; width: max-content; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .brand-logo { height: 60px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); }
+        
+        footer { background: #000; padding: 25px 50px; border-top: 1px solid var(--border-glass); z-index: 20; position: relative; }
+        .footer-wrapper { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; width: 100%; }
+        .footer-left { flex: 1; text-align: left; }
+        .ing-name { color: #00eaff !important; font-weight: 700; font-size: 1rem; font-family: 'Montserrat', sans-serif; letter-spacing: 0.5px; text-shadow: 0 0 10px rgba(0, 234, 255, 0.5); }
+        .footer-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+        .socials { display: flex; gap: 15px; justify-content: center; margin-bottom: 5px; }
+        .socials img { width: 32px !important; height: 32px !important; filter: invert(74%) sepia(60%) saturate(489%) hue-rotate(358deg) brightness(92%) contrast(92%); transition: 0.3s; }
+        .socials img:hover { transform: scale(1.1); filter: invert(74%) sepia(60%) saturate(489%) hue-rotate(358deg) brightness(110%) contrast(92%) drop-shadow(0 0 8px var(--gold-main)); }
+        .copyright { color: #444; font-size: 0.8rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-right { flex: 1; display: flex; justify-content: flex-end; }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--gold-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
+        
+        .services-modal, .gallery-page { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .services-modal.active, .gallery-page.active { display: flex; }
+        .services-box { background: #111; border: 1px solid var(--gold-main); padding: 30px; border-radius: 24px; max-width: 450px; width: 90%; text-align: center; color: #fff; }
+        .services-box h3 { color: var(--gold-main) !important; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .gallery-page { background: var(--bg-dark); }
+        .gallery-close { position: absolute; top: 30px; left: 30px; color: var(--text-light); cursor: pointer; border: none; background: none; z-index: 3001; font-size: 1.2rem; font-weight: bold; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 80px 20px; width: 100%; max-width: 1200px; overflow-y: auto; height: 100vh; align-content: start; }
+        .gallery-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-glass); transition: all 0.3s ease; display: block; }
+        .gallery-grid img:hover { transform: scale(1.05); border-color: var(--gold-main); box-shadow: 0 0 15px var(--gold-glow); z-index: 10; }
+
+        @media (max-width: 768px) {
+            .brand { flex-direction: column !important; } 
+            .brand-title { text-align: center !important; font-size: 2.5rem !important; margin-top:-50px !important; margin-left: -30px !important; padding-bottom: 20px !important; }
+            .logo { margin-left: -5px !important; margin-bottom: 0 !important; }
+            .brand-text { align-items: center !important; text-align: center !important; gap: 10px !important; margin-left: 30px !important;}
+            .brand-subtitle { font-size: 0.9rem !important; text-align: center !important; margin-bottom: -25px !important; margin-left:-30px !important; }
+            .hero-description { width: 95% !important; padding: 30px 20px !important; }
+            .tech-grid { flex-wrap: wrap; justify-content: center; gap: 30px; }
+            .tech-item { justify-content: center !important; flex: auto; }
+            .tech-item img { height: 100px !important; }
+            .services { grid-template-columns: 1fr !important; } 
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .footer-wrapper { flex-direction: column; gap: 20px; text-align: center; }
+            .footer-left, .footer-right { text-align: center; justify-content: center; }
+            .footer-right { order: -1; } 
+        }
+
+        body.light { 
+            --bg-dark: #f4f4f4; 
+            --text-light: #111111; 
+            --text-desc: #444444; 
+            --border-glass: rgba(0, 0, 0, 0.1); 
+            --card-bg: rgba(255, 255, 255, 0.9); 
+            --gold-glow: rgba(212, 175, 55, 0.2); 
+            --hero-bg: rgba(255, 255, 255, 0.85); 
+        }
+        
+        body.light .brand-title {
+            background: none !important;
+            -webkit-text-fill-color: #1a1a1a !important;
+            color: #1a1a1a !important;
+        }
+
+        body.light .hero-description,
+        body.light .card,
+        body.light .faq-item,
+        body.light .services-box {
+            background: #252525 !important; 
+            border: 1px solid #d4af37 !important; 
+            color: #ffffff !important; 
+            text-shadow: none !important;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important;
+        }
+
+        body.light .hero-description, 
+        body.light .card h3, 
+        body.light .faq-question,
+        body.light .services-box h3 {
+            color: #d4af37 !important; 
+        }
+
+        body.light .card p,
+        body.light .faq-answer,
+        body.light .services-box ul li {
+            color: #cccccc !important; 
+        }
+
+        body.light .comparison-title,
+        body.light #faq h2 { 
+            color: #000000 !important; 
+        }
+        
+        body.light .menu { background: rgba(240, 240, 240, 0.95); border-right: 1px solid #ddd; }
+        body.light .menu a, body.light .menu button { color: #222; }
+        body.light .menu a:hover { color: var(--gold-main); }
+        body.light .gallery-page { background: #f4f4f4; }
+        body.light .gallery-close { color: #000; }
+
+        @media (max-width: 768px) {
+
+            .tech-item:nth-child(1) { 
+                transform: translate(105px, 35px) !important;
+            }
+            .tech-item:nth-child(2) { 
+                transform: translate(-85px, 200px) !important; 
+            }
+            .tech-item:nth-child(3) { 
+                transform: translate(10px, 240px) !important;  
+            }
+
+            .tech-images {
+                padding-bottom: 80px !important;
+            }
+
+            .reveal h2 {
+            margin-top: 160px!important;
+            }
+        } 
+
+        @media (max-width: 768px) {
+
+    .comparison-grid {
+        grid-template-columns: 1fr !important; 
+        gap: 30px !important;
+    } 
+    .comparison-item img { 
+        width: 100% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div id="particles-js"></div>
+
+    <div id="main-content">
+        <header class="hero">
+            <button id="theme-toggle" class="theme-btn">🌙</button>
+            <button class="menu-btn" id="menuBtn">☰</button>
+            <nav class="menu" id="menu">
+                <button id="closeMenuBtn" style="align-self: flex-end; font-size: 1.5rem;">✕</button>
+                <button class="menu-link" id="menuServices">Servicios</button>
+                <a href="#faq" id="menuFaq">Preguntas frecuentes</a>
+                <a href="#" id="menuGallery">Galería</a>
+                <a href="#footer" id="menuContact">Contáctanos</a>
+            </nav>
+            <div class="hero-content">
+                <div class="brand">
+                    <img src="img/COLD_BOOT_SYSTEMS_LOGO.png" alt="Cold Boot Systems" class="logo">
+                    <div class="brand-text">
+                        <h1 class="brand-title">COLD BOOT SYSTEMS</h1>
+                        <h3 class="brand-subtitle">Soporte técnico profesional · Diagnóstico previo · Soluciones tecnológicas</h3>
+                    </div>
+                </div>
+                <p class="hero-description">
+                    En Cold Boot Systems nos dedicamos a darle una segunda vida a tu equipo con un soporte técnico honesto y profesional.
+                    Nos enfocamos en diagnósticos claros, soluciones reales y optimización de hardware.
+                </p>
+            </div>
+        </header>
+
+        <section class="tech-images">
+            <div class="tech-grid">
+                <div class="tech-item"><img src="img/WIN11.png" alt="Windows 11"></div>
+                <div class="tech-item"><img src="img/CONFIGURACION.png" alt="kit"></div>
+                <div class="tech-item"><img src="img/LINUX.png" alt="Linux"></div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Nuestros <span>Servicios</span></h2>
+            <div class="services">
+                <div class="card">
+                    <h3>💻 Mantenimiento Preventivo</h3>
+                    <p>Limpieza interna profesional y cambio de pasta térmica</p>
+                </div>
+                <div class="card">
+                    <h3>💿 Instalación de sistema Operativo</h3>
+                    <p>Formateo e instalación de Windows y Linux.</p>
+                </div>
+                <div class="card">
+                    <h3>⚙️ Optimización</h3>
+                    <p>Configuración estable y segura.</p>
+                </div>
+                <div class="card">
+                    <h3>🔒 Seguridad</h3>
+                    <p>Eliminación de virus, y protección básica.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <p class="comparison-title">
+                El polvo acumulado dentro de la laptop reduce su rendimiento, un mantenimiento profesional mejora su desempeño.
+            </p>
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <img src="img/FOTO_SUCIA.jpeg" alt="Laptop sucia">
+                    <span class="bad">❌ ANTES</span>
+                </div>
+                <div class="comparison-item">
+                    <img src="img/FOTO_LIMPIA.jpeg" alt="Laptop limpia">
+                    <span class="good">✅ DESPUÉS</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" id="faq">
+            <h2>Preguntas <span>frecuentes</span></h2>
+            <div class="faq-item">
+                <button class="faq-question">¿Cuánto tiempo tarda el mantenimiento? <span>+</span></button>
+                <div class="faq-answer">Normalmente el mantenimiento se realiza el mismo día, aunque podría extenderse hasta 24 horas, dependiendo el estado del equipo.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Qué incluye el mantenimiento preventivo? <span>+</span></button>
+                <div class="faq-answer">Realizamos limpieza profunda de ventiladores y componentes, eliminación de polvo acumulado y optimización del sistema operativo.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Hacen revisiones antes de formatear o actualizar? <span>+</span></button>
+                <div class="faq-answer">Si, siempre realizamos un diagnóstico antes de empezar cualquier trabajo.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Cómo se si mi computadora necesita mantenimiento o cambio de pasta térmica? <span>+</span></button>
+                <div class="faq-answer">Si notas que tu computadora se caliente mucho o hace ruido excesivo, es momento de una revisión técnica.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Qué archivos pueden recuperar y que significa recuperación a nivel lógico? <span>+</span></button>
+                <div class="faq-answer">Rescatamos archivos borrados por error o fallos de software, siempre que el disco no tenga daño físico (golpes o quemaduras).</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Qué sistemas operativos trabajan? <span>+</span></button>
+                <div class="faq-answer">Trabajamos con Windows y Linux.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Trabajan laptops y PCs? <span>+</span></button>
+                <div class="faq-answer">Sí, trabajamos con ambos tipos de equipos.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">¿Qué formas de pago aceptan? <span>+</span></button>
+                <div class="faq-answer">Aceptamos efectivo, transferencia bancaria y tarjetas.</div>
+            </div>
+        </section>
+
+        <section class="brands-section reveal">
+            <div class="brands-track">
+                <img src="img/LOGO_HP.png" alt="HP" class="brand-logo"><img src="img/LOGO_DELL.png" alt="Dell" class="brand-logo"><img src="img/LOGO_LENOVO.png" alt="Lenovo" class="brand-logo"><img src="img/LOGO_ASUS.png" alt="Asus" class="brand-logo"><img src="img/LOGO_ACER.png" alt="Acer" class="brand-logo">
+                <img src="img/LOGO_HP.png" alt="HP" class="brand-logo"><img src="img/LOGO_DELL.png" alt="Dell" class="brand-logo"><img src="img/LOGO_LENOVO.png" alt="Lenovo" class="brand-logo"><img src="img/LOGO_ASUS.png" alt="Asus" class="brand-logo"><img src="img/LOGO_ACER.png" alt="Acer" class="brand-logo">
+            </div>
+        </section>
+
+        <footer id="footer">
+            <div class="footer-wrapper">
+                <div class="footer-left">
+                    <span class="ing-name">Ing. Sebastián Ayuso</span>
+                </div>
+
+                <div class="footer-center">
+                    <div class="socials">
+                        <a href="https://wa.me/522205338533" target="_blank"><img src="img/whatsapp.svg" alt="WA"></a>
+                        <a href="#" target="_blank"><img src="img/facebook.svg" alt="FB"></a>
+                        <a href="#" target="_blank"><img src="img/instagram.svg" alt="IG"></a>
+                    </div>
+                    <p class="copyright">© 2026 Cold Boot Systems</p>
+                </div>
+
+                <div class="footer-right"></div>
+            </div>
+        </footer>
+    </div> 
+
+    <a href="https://wa.me/522205338533" class="whatsapp-float" target="_blank">
+        <img src="img/whatsapp.svg" style="width:35px; height:35px; filter:brightness(10);" alt="WA">
+    </a>
+
+    <div class="services-modal" id="servicesModal">
+        <div class="services-box">
+            <h3>Servicios</h3>
+            <ul style="color:#ccc; padding-left:20px; line-height:2; text-align:left;">
+                <li>🔍 Diagnóstico completo del equipo</li>
+                <li>🧠 Revisión de encendido y rendimiento</li>
+                <li>🌡️ Control de temperatura</li>
+                <li>🧹 Limpieza interna profesional</li>
+                <li>🧊 Cambio de pasta térmica</li>
+                <li>⚙️ Optimización básica del sistema</li>
+                <li>🔒 Revisión de virus y seguridad</li>
+                <li>💾 Recuperación de datos (Nivel lógico)</li>
+            </ul>
+            <button class="close-services" id="closeServices" style="margin-top:20px; width:100%; padding:10px; cursor:pointer;">Cerrar</button>
+        </div>
+    </div>
+
+    <div class="gallery-page" id="galleryPage">
+        <button class="gallery-close" id="closeGallery">✕ VOLVER</button>
+        <div class="gallery-grid">
+            <img src="img/ELEMENTOS.jpeg" alt="G1"><img src="img/LAPTOP_LIMPIEZA.jpeg" alt="G2">
+            <img src="img/LAPTOP_FRENTE.png" alt="G3"><img src="img/COMPUTADORA_REVERSO.png" alt="G4">
+            <img src="img/WIN_AZUL.png" alt="G5"><img src="img/BLACKWINDOWS.png" alt="G6">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+
+        const toggleBtn = document.getElementById("theme-toggle");
+        if (toggleBtn) {
+            toggleBtn.addEventListener("click", () => {
+                document.body.classList.toggle("light");
+                toggleBtn.textContent = document.body.classList.contains("light") ? "🌞" : "🌙";
+            });
+        }
+
+        const reveals = document.querySelectorAll(".reveal");
+        function revealOnScroll() {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        particlesJS("particles-js", {
+            "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.3, "width": 1 }, "move": { "enable": true, "speed": 1.5 } },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" } }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } } }
+        });
+
+        const menuBtn = document.getElementById("menuBtn");
+        const menu = document.getElementById("menu");
+        const closeMenuBtn = document.getElementById("closeMenuBtn");
+        const menuServices = document.getElementById("menuServices");
+        const servicesModal = document.getElementById("servicesModal");
+        const closeServices = document.getElementById("closeServices");
+        const menuGallery = document.getElementById("menuGallery");
+        const galleryPage = document.getElementById("galleryPage");
+        const closeGallery = document.getElementById("closeGallery");
+
+        function toggleMenu() { menu.classList.toggle("active"); }
+        if (menuBtn) menuBtn.addEventListener("click", toggleMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener("click", () => menu.classList.remove("active"));
+
+        if (menuServices) menuServices.onclick = () => { menu.classList.remove("active"); servicesModal.classList.add("active"); };
+        if (closeServices) closeServices.onclick = () => servicesModal.classList.remove("active");
+
+        if (menuGallery) menuGallery.onclick = (e) => { e.preventDefault(); menu.classList.remove("active"); galleryPage.classList.add("active"); };
+        if (closeGallery) closeGallery.onclick = () => galleryPage.classList.remove("active");
+
+        const menuContact = document.getElementById("menuContact");
+        const footer = document.getElementById("footer");
+        if (menuContact && footer) menuContact.onclick = (e) => { e.preventDefault(); menu.classList.remove("active"); footer.scrollIntoView({behavior:"smooth"}); };
+
+        // 6. FAQ
+        const menuFaq = document.getElementById("menuFaq");
+        const faqSection = document.getElementById("faq");
+        const faqItems = document.querySelectorAll(".faq-item");
+
+        if (menuFaq && faqSection) {
+            menuFaq.onclick = (e) => {
+                e.preventDefault();
+                menu.classList.remove("active");
+                faqSection.classList.add("active"); // Muestra el cajón
+                setTimeout(() => faqSection.scrollIntoView({behavior:"smooth", block:"start"}), 100);
+            };
+        }
+
+        faqItems.forEach(item => {
+            const q = item.querySelector(".faq-question");
+            if (q) q.onclick = () => { 
+                faqItems.forEach(i => { if(i!==item) i.classList.remove("active"); });
+                item.classList.toggle("active"); 
+            };
+        });
+    </script>
+</body>
+</html>
