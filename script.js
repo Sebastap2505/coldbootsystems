@@ -1,3 +1,4 @@
+
 const toggleBtn = document.getElementById("theme-toggle");
 if (toggleBtn) {
     toggleBtn.addEventListener("click", () => {
@@ -74,9 +75,10 @@ const faqItems = document.querySelectorAll(".faq-item");
 if (menuFaq && faqSection) {
     menuFaq.addEventListener("click", (e) => {
         e.preventDefault();
-        menu.classList.remove("active"); 
+        menu.classList.remove("active");
         
         faqSection.classList.add("active");
+        
         setTimeout(() => {
             faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
@@ -87,7 +89,6 @@ faqItems.forEach(item => {
     const question = item.querySelector(".faq-question");
     if (question) {
         question.addEventListener("click", () => {
-            // Opcional: Cerrar las otras al abrir una para mantenerlo limpio
             faqItems.forEach(otherItem => {
                 if (otherItem !== item) otherItem.classList.remove("active");
             });
