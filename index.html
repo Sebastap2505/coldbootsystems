@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Cold Boot Systems</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/CHIP.svg">
+    <link rel="icon" href="img/COMPUTER.svg">
     <meta name="description" content="Soporte técnico profesional en Mérida. Diagnóstico, mantenimiento y optimización.">
     <meta name="author" content="Ing. Sebastián Ayuso">
     
@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-
         :root { 
             --bg-dark: #050505; 
             --gold-main: #d4af37; 
@@ -43,168 +42,102 @@
         .hero-content { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 0; }
         .brand { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: center !important; gap: 30px !important; margin-bottom: 40px !important; flex-wrap: wrap !important; }
         
-        .logo { 
-            width: 170px !important; 
-            margin-bottom: 0 !important; 
-            margin-left: 40px !important;
-            filter: drop-shadow(0 0 30px rgba(212,175,55,0.4)); 
-            transition: transform 0.5s; 
-            flex-shrink: 0 !important; 
-        }
+        .logo { width: 170px !important; margin-bottom: 0 !important; margin-left: 40px !important; filter: drop-shadow(0 0 30px rgba(212,175,55,0.4)); transition: transform 0.5s; flex-shrink: 0 !important; }
         .logo:hover { transform: scale(1.1); }
         
         .brand-text { display: flex; flex-direction: column; align-items: flex-start; gap: 15px !important; }
         
-        .brand-title { 
-            font-size: clamp(1.5rem, 4vw, 3rem) !important; 
-            line-height: 1 !important; 
-            margin: 0 !important; 
-            margin-top: 30px !important;   
-            margin-left: -35px !important; 
-            text-align: left !important; 
-            background: linear-gradient(180deg, #fff 20%, var(--gold-main) 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8)); 
-        }
+        .brand-title { font-size: clamp(1.5rem, 4vw, 3rem) !important; line-height: 1 !important; margin: 0 !important; margin-top: 30px !important; margin-left: -35px !important; text-align: left !important; background: linear-gradient(180deg, #fff 20%, var(--gold-main) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8)); }
 
-        .brand-subtitle {
-            font-family: 'Playfair Display', serif !important; font-style: italic; font-weight: 400;
-            color: var(--gold-main); font-size: 1.2rem; text-transform: none; letter-spacing: 0.5px;
-            margin-top: -10px !important; margin-bottom: 0; margin-left: -70px !important;
-            animation: breathing 4s ease-in-out infinite;
-        }
-        @keyframes breathing {
-            0% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
-            50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
-            100% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
-        }
+        .brand-subtitle { font-family: 'Playfair Display', serif !important; font-style: italic; font-weight: 400; color: var(--gold-main); font-size: 1.2rem; text-transform: none; letter-spacing: 0.5px; margin-top: -10px !important; margin-bottom: 0; margin-left: -70px !important; animation: breathing 4s ease-in-out infinite; }
+        @keyframes breathing { 0% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); } 50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); } 100% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); } }
 
-        .hero-description { 
-            width: 95% !important; max-width: 1400px !important; 
-            margin: -20px auto 50px !important; 
-            background: rgba(0, 0, 0, 0.3) !important; 
-            border: 1px solid rgba(212, 175, 55, 0.2) !important;
-            backdrop-filter: blur(10px) !important; border-radius: 16px !important; 
-            color: #D1D1D1 !important; 
-            text-shadow: none !important; 
-            font-size: 1.15rem !important; line-height: 1.9 !important; 
-            padding: 40px 60px !important; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important; transition: all 0.4s ease;
-            font-family: 'Montserrat', sans-serif !important; 
-            font-weight: 600; 
-            text-align: justify !important;      
-            text-align-last: center !important;  
-            hyphens: none !important;            
-            -webkit-hyphens: none !important;
-            -ms-hyphens: none !important;
-            letter-spacing: -0.3px !important; 
-        }
-
-        .hero-description:hover { 
-            color: #ffffff !important;
-            border-color: #d4af37 !important; 
-            transform: translateY(-3px); 
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15) !important;
-        }
+        .hero-description { width: 95% !important; max-width: 1400px !important; margin: -20px auto 50px !important; background: rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(212, 175, 55, 0.2) !important; backdrop-filter: blur(10px) !important; border-radius: 16px !important; color: #D1D1D1 !important; text-shadow: none !important; font-size: 1.15rem !important; line-height: 1.9 !important; padding: 40px 60px !important; box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important; transition: all 0.4s ease; font-family: 'Montserrat', sans-serif !important; font-weight: 600; text-align: justify !important; text-align-last: center !important; hyphens: none !important; -webkit-hyphens: none !important; -ms-hyphens: none !important; letter-spacing: -0.3px !important; }
+        .hero-description:hover { color: #ffffff !important; border-color: #d4af37 !important; transform: translateY(-3px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15) !important; }
         
-        .tech-images { 
-            padding-top: 0; 
-            margin-top: -200px; 
-            position: relative; z-index: 10; padding-left: 5%; padding-right: 5%; 
-        }
-        
-        .tech-grid { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            max-width: 1200px; 
-            margin: auto; 
-            gap: 20px; 
-        }
-        
-        .tech-item { 
-            display: flex; 
-            flex: 1; 
-            justify-content: center;
-            align-items: center;
-            padding: 25px; 
-            background: rgba(220, 220, 225, 0.02) !important; 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08) !important; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-            transition: all 0.4s ease; 
-            min-height: 180px; 
-        }
-        
-        .tech-item img { 
-            height: 100px !important; 
-            width: auto; 
-            opacity: 0.9 !important; 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); 
-            transition: 0.4s; 
-        }
-        
-        .tech-item:hover { 
-            transform: translateY(-8px); 
-            border-color: rgba(230, 230, 235, 0.3) !important; 
-            background: rgba(220, 220, 225, 0.08) !important; 
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.1); 
-        }
-        
-        .tech-item:hover img {
-            transform: scale(1.1); 
-            opacity: 1 !important;
-        }
+        .tech-images { padding-top: 0; margin-top: -200px; position: relative; z-index: 10; padding-left: 5%; padding-right: 5%; }
+        .tech-grid { display: flex; justify-content: center; align-items: center; max-width: 1200px; margin: auto; gap: 20px; }
+        .tech-item { display: flex; flex: 1; justify-content: center; align-items: center; padding: 25px; background: rgba(220, 220, 225, 0.02) !important; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.4s ease; min-height: 180px; }
+        .tech-item img { height: 100px !important; width: auto; opacity: 0.9 !important; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); transition: 0.4s; }
+        .tech-item:hover { transform: translateY(-8px); border-color: rgba(230, 230, 235, 0.3) !important; background: rgba(220, 220, 225, 0.08) !important; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.1); }
+        .tech-item:hover img { transform: scale(1.1); opacity: 1 !important; }
 
         section { padding: 80px 20px; max-width: 1200px; margin: auto; }
         h2 { font-size: 2.5rem; text-align: center; margin-bottom: 50px; color: var(--text-light); }
-        .reveal h2 {
-        margin-top: -60px; 
-        }
+        .reveal h2 { margin-top: -60px; }
         h2 span { color: var(--gold-main); }
-        
         .services { display: grid; grid-template-columns: repeat(2, 1fr) !important; gap: 30px; max-width: 1000px; margin: auto; }
         .card { background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; transition: 0.4s; text-align: center !important; }
         .card:hover { transform: translateY(-10px); border-color: var(--gold-main); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
         .card h3 { color: var(--gold-main) !important; font-size: 1.2rem; margin-bottom: 15px; display: flex; gap: 10px; align-items: center; justify-content: center !important; }
         .card p { color: var(--text-desc); font-size: 0.95rem; }
-        
-
-        .comparison-title { 
-            text-align: center; 
-            color: var(--gold-main); 
-            padding: 0 15px !important;
-            margin-top: -80px !important; 
-            margin-bottom: 20px; 
-            font-family: 'Montserrat', sans-serif !important;
-            font-weight: 800; 
-            text-transform: uppercase; 
-            font-size: 1.3rem; 
-            letter-spacing: 1px; 
-            transition: color 0.3s; 
-        }
-
+        .packages-section { margin-top: -20px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1100px; margin: auto; padding: 0 20px; }
+        .glass-card { background: rgba(20, 20, 20, 0.35); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-glass); border-radius: 24px; padding: 40px 30px; text-align: center; transition: all 0.4s ease; position: relative; display: flex; flex-direction: column; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); }
+        .glass-card:hover { transform: translateY(-10px); border-color: var(--gold-main); box-shadow: 0 15px 40px var(--gold-glow); }
+        .glass-card.popular { border-color: rgba(212, 175, 55, 0.4); background: linear-gradient(145deg, rgba(30, 30, 30, 0.5) 0%, rgba(10, 10, 10, 0.7) 100%); transform: scale(1.05); z-index: 5; }
+        .glass-card.popular:hover { transform: scale(1.05) translateY(-10px); }
+        .badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--gold-main); color: #000; padding: 6px 20px; border-radius: 20px; font-weight: 800; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 5px 15px var(--gold-glow); white-space: nowrap; }
+        .glass-card h3 { color: var(--text-light); font-size: 1.5rem; margin-top: 10px; margin-bottom: 10px; }
+        .glass-card.popular h3 { color: var(--gold-main) !important; text-shadow: 0 0 10px var(--gold-glow); }
+        .price { font-size: 2.2rem; font-weight: 900; font-family: 'Montserrat', sans-serif; color: var(--gold-main); margin-bottom: 10px; }
+        .price span { font-size: 1rem; color: var(--text-desc); font-weight: 500; }
+        .price small { font-size: 1.2rem; vertical-align: middle; color: var(--text-desc); font-weight: 500;}
+        .package-desc { color: var(--text-desc); font-size: 0.95rem; margin-bottom: 25px; min-height: 40px; }
+        .glass-card ul { list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; flex-grow: 1; }
+        .glass-card ul li { color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
+        .glass-card ul li::before { content: '✔'; color: var(--gold-main); font-weight: bold; font-size: 1.1rem; }
+        .btn-gold { background: transparent; border: 2px solid var(--gold-main); color: var(--gold-main); padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; display: block; width: 100%; }
+        .btn-gold:hover { background: var(--gold-main); color: #000; box-shadow: 0 0 20px var(--gold-glow); }
+        .glass-card.popular .btn-gold { background: var(--gold-main); color: #000; }
+        .glass-card.popular .btn-gold:hover { background: #fff; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        .individual-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1000px; margin: auto; }
+        .individual-card { padding: 25px 35px; flex-direction: row; justify-content: space-between; align-items: center; text-align: left; background: rgba(20, 20, 20, 0.4); }
+        .individual-info h3 { font-size: 1.2rem; color: var(--gold-main); margin-bottom: 8px; font-family: 'Montserrat', sans-serif; text-transform: none; letter-spacing: 0; }
+        .individual-info p { font-size: 0.9rem; color: var(--text-desc); margin-bottom: 0; }
+        .individual-price { text-align: right; min-width: 130px; }
+        .individual-price .price { font-size: 1.8rem; margin-bottom: 0; }
+        .comparison-title { text-align: center; color: var(--gold-main); padding: 0 15px !important; margin-top: -80px !important; margin-bottom: 20px; font-family: 'Montserrat', sans-serif !important; font-weight: 800; text-transform: uppercase; font-size: 1.3rem; letter-spacing: 1px; transition: color 0.3s; }
         .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 70px; }
         .comparison-item { text-align: center; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; border: 1px solid var(--border-glass); }
         .comparison-item img { width: 80%; border-radius: 12px; display: block; margin: 0 auto; }
         .bad { color: #ff5555; font-weight: 700; display: block; margin-top: 15px; }
         .good { color: #00ff41; font-weight: 700; display: block; margin-top: 15px; }
-        
         .faq-section { display: none; opacity: 0; transition: opacity 0.5s ease; }
         .faq-section.active { display: block; opacity: 1; animation: slideIn 0.5s ease forwards; }
         @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
         #faq h2 { font-family: 'Montserrat', sans-serif !important; font-weight: 800; font-style: normal; text-transform: uppercase; color: var(--text-light); text-shadow: none; font-size: 2.5rem; }
         #faq h2 span { color: var(--gold-main); }
-
         .faq-item { background: var(--card-bg); border: 1px solid var(--border-glass); margin-bottom: 15px; border-radius: 12px; overflow: hidden; }
         .faq-question { width: 100%; padding: 20px 25px; background: none; border: none; text-align: left; color: var(--gold-main) !important; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 1.15rem; cursor: pointer; display: flex; justify-content: space-between; }
         .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #ffffff; font-family: 'Montserrat', sans-serif !important; font-weight: 400; transition: 0.3s; line-height: 1.6; }
         .faq-item.active .faq-answer { padding-bottom: 25px; max-height: 200px; }
+
+        .map-container {
+            width: 100%;
+            max-width: 1000px; 
+            height: 400px; 
+            margin: 0 auto; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 1px solid var(--border-glass); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            transition: all 0.4s ease; 
+            background: rgba(20, 20, 20, 0.4); 
+        }
         
+        .map-container:hover {
+            border-color: var(--gold-main);
+            box-shadow: 0 15px 40px var(--gold-glow);
+            transform: translateY(-5px);
+        }
+
+        .map-container iframe {
+            filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(85%);
+            -webkit-filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(85%);
+            transition: filter 0.4s ease;
+        }
+
         .brands-section { width: 100vw !important; max-width: 100vw !important; position: relative; left: 50%; right: 50%; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden; padding: 30px 0; background: rgba(0, 0, 0, 0.9); border-top: 1px solid var(--border-glass); }
         .brands-track { display: flex; gap: 80px; width: max-content; animation: marquee 10s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -239,45 +172,22 @@
             .brand-text { align-items: center !important; text-align: center !important; gap: 10px !important; margin-left: 30px !important;}
             .brand-subtitle { font-size: 0.9rem !important; text-align: center !important; margin-bottom: -25px !important; margin-left:-30px !important; }
             
-            .hero-description { 
-                width: 95% !important; 
-                padding: 30px 20px !important; 
-                margin-bottom: 60px !important; 
-                margin-top: 30px !important; 
-                text-align: justify !important;
-                text-align-last: center !important;
-                hyphens: none !important;
-                color: #D1D1D1 !important;
-                text-shadow: none !important;
-            }
+            .hero-description { width: 95% !important; padding: 30px 20px !important; margin-bottom: 60px !important; margin-top: 30px !important; text-align: justify !important; text-align-last: center !important; hyphens: none !important; color: #D1D1D1 !important; text-shadow: none !important; }
             
-            .tech-grid { 
-                flex-direction: column !important; 
-                gap: 25px; 
-                align-items: center; 
-            }
-            
-            .tech-item { 
-                width: 150px !important;  
-                height: 150px !important; 
-                min-height: 150px !important;
-                margin: 0 auto !important;
-                transform: none !important;
-                border-radius: 20px; 
-                padding: 10px !important;
-            }
-            
-            .tech-item img { 
-                height: 80px !important; 
-                width: auto !important;
-            }
-            
-            .tech-images { 
-                margin-top: -30px !important; 
-                padding-bottom: 50px !important; 
-            } 
+            .tech-grid { flex-direction: column !important; gap: 25px; align-items: center; }
+            .tech-item { width: 150px !important; height: 150px !important; min-height: 150px !important; margin: 0 auto !important; transform: none !important; border-radius: 20px; padding: 10px !important; }
+            .tech-item img { height: 80px !important; width: auto !important; }
+            .tech-images { margin-top: -30px !important; padding-bottom: 50px !important; } 
             
             .services { grid-template-columns: 1fr !important; } 
+            .pricing-grid { grid-template-columns: 1fr !important; max-width: 400px; margin: auto; gap: 40px !important; }
+            .glass-card.popular { transform: none !important; margin: 10px 0; }
+            .glass-card.popular:hover { transform: translateY(-5px) !important; }
+
+            .individual-grid { grid-template-columns: 1fr; }
+            .individual-card { flex-direction: column; text-align: center; gap: 15px; }
+            .individual-price { text-align: center; }
+
             .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
             .footer-wrapper { flex-direction: column; gap: 20px; text-align: center; }
             .footer-left, .footer-right { text-align: center; justify-content: center; }
@@ -285,76 +195,59 @@
             
             .reveal h2 { margin-top: 0px!important; } 
             
-            .comparison-grid {
-                grid-template-columns: 1fr !important; 
-                gap: 30px !important;
-            } 
-            .comparison-item img { 
-                width: 100% !important;
-                max-width: 400px !important;
-                margin: 0 auto !important;
-                display: block !important;
-            }
+            .comparison-grid { grid-template-columns: 1fr !important; gap: 30px !important; } 
+            .comparison-item img { width: 100% !important; max-width: 400px !important; margin: 0 auto !important; display: block !important; }
 
-            .comparison-title {
-                font-size: 0.7rem !important; 
-                text-align: justify !important; 
-                text-align-last: center !important; 
-                hyphens: none !important; 
-                -webkit-hyphens: none !important;
-                -ms-hyphens: none !important;
-                width: 100% !important; 
-                margin-left: auto !important;
-                margin-right: auto !important;
-                padding: 0 5px !important; 
-            }
+            .comparison-title { font-size: 0.7rem !important; text-align: justify !important; text-align-last: center !important; hyphens: none !important; -webkit-hyphens: none !important; -ms-hyphens: none !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important; padding: 0 5px !important; }
+            
+            .map-container { height: 400px; max-width: 90%; }
         }
 
         body.light { 
-            --bg-dark: #f4f4f4; 
-            --text-light: #111111; 
-            --text-desc: #444444; 
-            --border-glass: rgba(0, 0, 0, 0.1); 
-            --card-bg: rgba(255, 255, 255, 0.9); 
-            --gold-glow: rgba(212, 175, 55, 0.2); 
-            --hero-bg: rgba(255, 255, 255, 0.85); 
+            --bg-dark: #f4f4f4; --text-light: #111111; --text-desc: #444444; 
+            --border-glass: rgba(0, 0, 0, 0.1); --card-bg: rgba(255, 255, 255, 0.9); 
+            --gold-glow: rgba(212, 175, 55, 0.2); --hero-bg: rgba(255, 255, 255, 0.85); 
         }
         
-        body.light .brand-title {
-            background: none !important;
-            -webkit-text-fill-color: #1a1a1a !important;
-            color: #1a1a1a !important;
-        }
+        body.light .brand-title { background: none !important; -webkit-text-fill-color: #1a1a1a !important; color: #1a1a1a !important; }
 
-        body.light .hero-description,
-        body.light .card,
-        body.light .faq-item,
-        body.light .services-box,
-        body.light .tech-item { 
+        body.light .hero-description, 
+        body.light .card, 
+        body.light .faq-item, 
+        body.light .services-box, 
+        body.light .tech-item,
+        body.light .glass-card,
+        body.light .individual-card { 
             background: #252525 !important; 
             border: 1px solid #d4af37 !important; 
             color: #ffffff !important; 
-            text-shadow: none !important;
+            text-shadow: none !important; 
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important;
+        }
+
+        body.light .glass-card.popular { 
+            background: #1a1a1a !important; 
+            border: 2px solid #d4af37 !important; 
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4) !important; 
         }
 
         body.light .hero-description, 
         body.light .card h3, 
-        body.light .faq-question,
-        body.light .services-box h3 {
-            color: #d4af37 !important; 
-        }
+        body.light .faq-question, 
+        body.light .services-box h3,
+        body.light .glass-card h3,
+        body.light .individual-info h3 { color: #d4af37 !important; }
 
-        body.light .card p,
-        body.light .faq-answer,
-        body.light .services-box ul li {
-            color: #cccccc !important; 
-        }
+        body.light .card p, body.light .faq-answer, body.light .services-box ul li, body.light .glass-card ul li, body.light .individual-info p, body.light .package-desc { color: #cccccc !important; }
+        body.light .price { color: #d4af37 !important; }
+        body.light .price span, body.light .price small { color: #cccccc !important; }
+        body.light .comparison-title, body.light #faq h2 { color: #000000 !important; }
 
-        body.light .comparison-title,
-        body.light #faq h2 { 
-            color: #000000 !important; 
+        body.light .map-container iframe {
+            filter: none;
+            -webkit-filter: none;
         }
+        body.light .map-container { border: 1px solid #d4af37; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); background: #252525;}
         
         body.light .menu { background: rgba(240, 240, 240, 0.95); border-right: 1px solid #ddd; }
         body.light .menu a, body.light .menu button { color: #222; }
@@ -425,6 +318,83 @@
             </div>
         </section>
 
+        <section class="reveal packages-section">
+            <h2>Paquetes <span>Recomendados</span></h2>
+            <div class="pricing-grid">
+                
+                <div class="pricing-card glass-card">
+                    <h3>Esencial</h3>
+                    <div class="price">Desde $600 <span>MXN</span></div>
+                    <p class="package-desc">Mantenimiento preventivo básico y esencial para alargar la vida de tu equipo.</p>
+                    <ul>
+                        <li>Limpieza interna profesional</li>
+                        <li>Cambio de pasta térmica</li>
+                        <li>Diagnóstico de salud de disco</li>
+                        <li>Actualización de drivers</li>
+                    </ul>
+                    <a href="https://wa.me/522205338533?text=%20Me%20interesa%20el%20paquete%20Esencial" class="btn-gold" target="_blank">Me interesa</a>
+                </div>
+
+                <div class="pricing-card glass-card popular">
+                    <div class="badge">El Más Elegido</div>
+                    <h3>Potenciador</h3>
+                    <div class="price">Desde $1,000 <span>MXN</span></div>
+                    <p class="package-desc">Solución integral para restaurar la velocidad. Tu equipo volverá a estar rápido.</p>
+                    <ul>
+                        <li>Todo lo del paquete esencial</li>
+                        <li>Formateo e instalación limpia de Windows/linux</li>
+                        <li>Optimización de Windows/Linux</li>
+                        <li>Eliminación de virus y malware</li>
+                        <li>eliminación de bloatware</li>
+                    </ul>
+                    <a href="https://wa.me/522205338533?text=%20Me%20interesa%20el%20paquete%20Potenciador" class="btn-gold" target="_blank">Me Interesa</a>
+                </div>
+
+                <div class="pricing-card glass-card">
+                    <h3>SUPER RÁPIDO</h3>
+                    <div class="price">Desde $1,500+ <span>MXN</span></div>
+                    <p class="package-desc">Rendimiento máximo, tu equipo se sentirá como nuevo.</p>
+                    <ul>
+                        <li>Todo lo del paquete Potenciador</li>
+                        <li>Instalación de disco sólido (SSD) (disco se vende por separado)</li>
+                        <li>Respaldo de información y archivos</li>
+                        <li>Configuración de seguridad avanzada</li>
+                        <li>clonación de disco duro a SSD</li>
+                    </ul>
+                    <a href="https://wa.me/522205338533?text=%20Me%20interesa%20el%20paquete%20Super%20Rápido" class="btn-gold" target="_blank">Me Interesa</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Servicios <span>extras</span></h2>
+            <div class="individual-grid">
+                
+                <div class="glass-card individual-card">
+                    <div class="individual-info">
+                        <h3>Cambio de Disco Mecánico a SSD</h3>
+                        <p>Incluye cambio de disco y clonación de datos. <br><br><span style="color:var(--gold-main);">(El disco se cobra aparte)</span>.</p>
+                    </div>
+                    <div class="individual-price">
+                        <div class="price">$800 <span>MXN</span></div>
+                    </div>
+                </div>
+
+                <div class="glass-card individual-card">
+                    <div class="individual-info">
+                        <h3>Recuperación de datos de disco duro SATA "2.5" (LAPTOPS)</h3>
+                        <br>
+                        <p>Rescate de archivos y fotos a nivel lógico.</p>
+                    </div>
+                    <div class="individual-price">
+                        <div class="price"><small>Desde</small> $1,200 <span>MXN</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <section class="reveal">
             <p class="comparison-title">
                 El polvo acumulado dentro de la laptop reduce su rendimiento, un mantenimiento profesional mejora su desempeño.
@@ -481,6 +451,21 @@
             </div>
         </section>
 
+        <section class="reveal map-section">
+            <h2><span>ubicación</span></h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.149114690734!2d-89.54900282576195!3d20.9866589892253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f567a063cc19043%3A0xdd0bc2a4af01b324!2sC.%20131%20819%2C%20Los%20H%C3%A9roes%2C%2097306%20M%C3%A9rida%2C%20Yuc.!5e0!3m2!1ses!2smx!4v1770696575614!5m2!1ses!2smx" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+
         <section class="brands-section reveal">
             <div class="brands-track">
                 <img src="img/LOGO_HP.png" alt="HP" class="brand-logo"><img src="img/LOGO_DELL.png" alt="Dell" class="brand-logo"><img src="img/LOGO_LENOVO.png" alt="Lenovo" class="brand-logo"><img src="img/LOGO_ASUS.png" alt="Asus" class="brand-logo"><img src="img/LOGO_ACER.png" alt="Acer" class="brand-logo">
@@ -513,7 +498,7 @@
 
     <div class="services-modal" id="servicesModal">
         <div class="services-box">
-            <h3>Servicios</h3>
+            <h3>SERVICIOS</h3>
             <ul style="color:#ccc; padding-left:20px; line-height:2; text-align:left;">
                 <li>🔍 Diagnóstico completo del equipo</li>
                 <li>🧠 Revisión de encendido y rendimiento</li>
@@ -541,7 +526,6 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-
         const toggleBtn = document.getElementById("theme-toggle");
         if (toggleBtn) {
             toggleBtn.addEventListener("click", () => {
@@ -593,7 +577,6 @@
         const footer = document.getElementById("footer");
         if (menuContact && footer) menuContact.onclick = (e) => { e.preventDefault(); menu.classList.remove("active"); footer.scrollIntoView({behavior:"smooth"}); };
 
-        // 6. FAQ
         const menuFaq = document.getElementById("menuFaq");
         const faqSection = document.getElementById("faq");
         const faqItems = document.querySelectorAll(".faq-item");
@@ -602,7 +585,7 @@
             menuFaq.onclick = (e) => {
                 e.preventDefault();
                 menu.classList.remove("active");
-                faqSection.classList.add("active"); // Muestra el cajón
+                faqSection.classList.add("active"); 
                 setTimeout(() => faqSection.scrollIntoView({behavior:"smooth", block:"start"}), 100);
             };
         }
@@ -616,7 +599,6 @@
         });
     </script>
 </body>
-
 </html>
 
 
