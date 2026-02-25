@@ -5,7 +5,7 @@
     <title>Cold Boot Systems</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/COMPUTER.svg">
-    <meta name="description" content="Soporte técnico profesional en Mérida. Diagnóstico, mantenimiento y optimización.">
+    <meta name="description" content="Soporte técnico profesional, mantemiento y soporte.">
     <meta name="author" content="Ing. Sebastián Ayuso">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -698,18 +698,25 @@
 
             const nombre = document.getElementById('clienteNombre').value;
             const tel = document.getElementById('clienteTel').value;
-
-            let clientIp = "Desconocida";
+            let clientIp = "No detectada";
+            
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
                 const ipData = await response.json();
                 clientIp = ipData.ip;
             } catch (err) {
-                console.warn("No se pudo obtener la IP", err);
-                clientIp = "Bloqueada por firewall/adblock";
+                console.warn("ipify falló, intentando respaldo...");
+                try {
+
+                    const resBackup = await fetch('https://ipapi.co/json/');
+                    const dataBackup = await resBackup.json();
+                    clientIp = dataBackup.ip;
+                } catch (err2) {
+                    clientIp = "IP Bloqueada/Privada";
+                }
             }
             
-            const clientDevice = navigator.userAgent;
+            const clientDevice = navigator.userAgent || "Dispositivo Desconocido";
 
             const { error } = await supabaseClient
                 .from('registros_aceptacion')
@@ -730,6 +737,8 @@
                 btnSubmit.textContent = "Acepto los Términos";
                 btnSubmit.disabled = false;
             } else {
+                const msjConfirmacion = `Hola Ing. Sebastián, soy ${nombre}. Acabo de leer y aceptar los Términos y Condiciones en la página web oficial para el diagnóstico de mi equipo.`;
+                window.open(`https://wa.me/522205338533?text=${encodeURIComponent(msjConfirmacion)}`, '_blank');
                 
                 formTerminos.reset();
                 terminosModal.classList.remove('active');
@@ -737,9 +746,13 @@
                 btnSubmit.disabled = false;
             }
         });
+
     </script>
 </body>
 </html>
+
+
+
 
 
 
