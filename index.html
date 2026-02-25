@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root { 
             --bg-dark: #050505; 
@@ -87,10 +89,11 @@
         .glass-card ul { list-style: none; padding: 0; margin: 0 0 30px 0; text-align: left; flex-grow: 1; }
         .glass-card ul li { color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
         .glass-card ul li::before { content: '✔'; color: var(--gold-main); font-weight: bold; font-size: 1.1rem; }
-        .btn-gold { background: transparent; border: 2px solid var(--gold-main); color: var(--gold-main); padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; display: block; width: 100%; }
+        .btn-gold { background: transparent; border: 2px solid var(--gold-main); color: var(--gold-main); padding: 12px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; display: block; width: 100%; border: none; cursor: pointer; text-align: center; }
         .btn-gold:hover { background: var(--gold-main); color: #000; box-shadow: 0 0 20px var(--gold-glow); }
         .glass-card.popular .btn-gold { background: var(--gold-main); color: #000; }
         .glass-card.popular .btn-gold:hover { background: #fff; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        
         .individual-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1000px; margin: auto; }
         .individual-card { padding: 25px 35px; flex-direction: row; justify-content: space-between; align-items: center; text-align: left; background: rgba(20, 20, 20, 0.4); }
         .individual-info h3 { font-size: 1.2rem; color: var(--gold-main); margin-bottom: 8px; font-family: 'Montserrat', sans-serif; text-transform: none; letter-spacing: 0; }
@@ -103,6 +106,7 @@
         .comparison-item img { width: 80%; border-radius: 12px; display: block; margin: 0 auto; }
         .bad { color: #ff5555; font-weight: 700; display: block; margin-top: 15px; }
         .good { color: #00ff41; font-weight: 700; display: block; margin-top: 15px; }
+        
         .faq-section { display: none; opacity: 0; transition: opacity 0.5s ease; }
         .faq-section.active { display: block; opacity: 1; animation: slideIn 0.5s ease forwards; }
         @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -113,30 +117,9 @@
         .faq-answer { max-height: 0; overflow: hidden; padding: 0 25px; color: #ffffff; font-family: 'Montserrat', sans-serif !important; font-weight: 400; transition: 0.3s; line-height: 1.6; }
         .faq-item.active .faq-answer { padding-bottom: 25px; max-height: 200px; }
 
-        .map-container {
-            width: 100%;
-            max-width: 1000px; 
-            height: 400px; 
-            margin: 0 auto; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            border: 1px solid var(--border-glass); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-            transition: all 0.4s ease; 
-            background: rgba(20, 20, 20, 0.4); 
-        }
-        
-        .map-container:hover {
-            border-color: var(--gold-main);
-            box-shadow: 0 15px 40px var(--gold-glow);
-            transform: translateY(-5px);
-        }
-
-        .map-container iframe {
-            filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(85%);
-            -webkit-filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(85%);
-            transition: filter 0.4s ease;
-        }
+        .map-container { width: 100%; max-width: 1000px; height: 400px; margin: 0 auto; border-radius: 20px; overflow: hidden; border: 1px solid var(--border-glass); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.4s ease; background: rgba(20, 20, 20, 0.4); }
+        .map-container:hover { border-color: var(--gold-main); box-shadow: 0 15px 40px var(--gold-glow); transform: translateY(-5px); }
+        .map-container iframe { filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(85%); -webkit-filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(85%); transition: filter 0.4s ease; }
 
         .brands-section { width: 100vw !important; max-width: 100vw !important; position: relative; left: 50%; right: 50%; margin-left: -50vw !important; margin-right: -50vw !important; overflow: hidden; padding: 30px 0; background: rgba(0, 0, 0, 0.9); border-top: 1px solid var(--border-glass); }
         .brands-track { display: flex; gap: 80px; width: max-content; animation: marquee 10s linear infinite; }
@@ -155,15 +138,32 @@
         .footer-right { flex: 1; display: flex; justify-content: flex-end; }
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--gold-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
         
-        .services-modal, .gallery-page { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-        .services-modal.active, .gallery-page.active { display: flex; }
-        .services-box { background: #111; border: 1px solid var(--gold-main); padding: 30px; border-radius: 24px; max-width: 450px; width: 90%; text-align: center; color: #fff; }
-        .services-box h3 { color: var(--gold-main) !important; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+        .services-modal, .gallery-page, .contrato-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .services-modal.active, .gallery-page.active, .contrato-modal.active { display: flex; }
+        .services-box, .contrato-box { background: var(--card-bg); border: 1px solid var(--gold-main); padding: 30px; border-radius: 24px; max-width: 550px; width: 90%; color: var(--text-light); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .services-box { text-align: center; }
+        .contrato-box { max-height: 90vh; overflow-y: auto; text-align: left; }
+        
+        .services-box h3, .contrato-box h3 { color: var(--gold-main) !important; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; text-align: center; }
         .gallery-page { background: var(--bg-dark); }
         .gallery-close { position: absolute; top: 30px; left: 30px; color: var(--text-light); cursor: pointer; border: none; background: none; z-index: 3001; font-size: 1.2rem; font-weight: bold; }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 80px 20px; width: 100%; max-width: 1200px; overflow-y: auto; height: 100vh; align-content: start; }
         .gallery-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-glass); transition: all 0.3s ease; display: block; }
         .gallery-grid img:hover { transform: scale(1.05); border-color: var(--gold-main); box-shadow: 0 0 15px var(--gold-glow); z-index: 10; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--text-desc); font-family: 'Montserrat', sans-serif; font-weight: 600;}
+        .form-group input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-glass); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Inter', sans-serif; outline: none; transition: border 0.3s; }
+        .form-group input:focus { border-color: var(--gold-main); }
+        
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 25px; }
+        .checkbox-group input { margin-top: 5px; cursor: pointer; transform: scale(1.2); }
+        .checkbox-group label { font-size: 0.85rem; color: var(--text-desc); line-height: 1.5; cursor: pointer; }
+        
+        .btn-submit { background: var(--gold-main); color: #000; border: none; padding: 15px; border-radius: 12px; width: 100%; font-weight: 800; font-family: 'Montserrat', sans-serif; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .btn-submit:hover { box-shadow: 0 0 20px var(--gold-glow); background: #fff; transform: translateY(-2px); }
+        .btn-submit:disabled { background: #555; cursor: not-allowed; box-shadow: none; transform: none; color: #888;}
+        .close-contrato { background: transparent; border: 1px solid var(--text-desc); color: var(--text-desc); padding: 10px; border-radius: 8px; width: 100%; margin-top: 15px; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; }
+        .close-contrato:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
         @media (max-width: 768px) {
             .brand { flex-direction: column !important; } 
@@ -211,42 +211,20 @@
         
         body.light .brand-title { background: none !important; -webkit-text-fill-color: #1a1a1a !important; color: #1a1a1a !important; }
 
-        body.light .hero-description, 
-        body.light .card, 
-        body.light .faq-item, 
-        body.light .services-box, 
-        body.light .tech-item,
-        body.light .glass-card,
-        body.light .individual-card { 
-            background: #252525 !important; 
-            border: 1px solid #d4af37 !important; 
-            color: #ffffff !important; 
-            text-shadow: none !important; 
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important;
+        body.light .hero-description, body.light .card, body.light .faq-item, body.light .services-box, body.light .tech-item, body.light .glass-card, body.light .individual-card, body.light .contrato-box { 
+            background: #252525 !important; border: 1px solid #d4af37 !important; color: #ffffff !important; text-shadow: none !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important;
         }
 
-        body.light .glass-card.popular { 
-            background: #1a1a1a !important; 
-            border: 2px solid #d4af37 !important; 
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4) !important; 
-        }
+        body.light .glass-card.popular { background: #1a1a1a !important; border: 2px solid #d4af37 !important; box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4) !important; }
 
-        body.light .hero-description, 
-        body.light .card h3, 
-        body.light .faq-question, 
-        body.light .services-box h3,
-        body.light .glass-card h3,
-        body.light .individual-info h3 { color: #d4af37 !important; }
+        body.light .hero-description, body.light .card h3, body.light .faq-question, body.light .services-box h3, body.light .glass-card h3, body.light .individual-info h3, body.light .contrato-box h3 { color: #d4af37 !important; }
 
         body.light .card p, body.light .faq-answer, body.light .services-box ul li, body.light .glass-card ul li, body.light .individual-info p, body.light .package-desc { color: #cccccc !important; }
         body.light .price { color: #d4af37 !important; }
         body.light .price span, body.light .price small { color: #cccccc !important; }
         body.light .comparison-title, body.light #faq h2 { color: #000000 !important; }
 
-        body.light .map-container iframe {
-            filter: none;
-            -webkit-filter: none;
-        }
+        body.light .map-container iframe { filter: none; -webkit-filter: none; }
         body.light .map-container { border: 1px solid #d4af37; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); background: #252525;}
         
         body.light .menu { background: rgba(240, 240, 240, 0.95); border-right: 1px solid #ddd; }
@@ -254,7 +232,12 @@
         body.light .menu a:hover { color: var(--gold-main); }
         body.light .gallery-page { background: #f4f4f4; }
         body.light .gallery-close { color: #000; }
-
+        
+        body.light .form-group input { background: #fff; color: #111; border-color: #ccc; }
+        body.light .form-group input:focus { border-color: #d4af37; }
+        body.light .close-contrato { border-color: #888; color: #aaa; }
+        body.light .close-contrato:hover { background: #ddd; color: #000; }
+        body.light .checkbox-group label { color: #444; }
     </style>
 </head>
 
@@ -271,7 +254,7 @@
                 <button class="menu-link" id="menuServices">Servicios</button>
                 <a href="#faq" id="menuFaq">Preguntas frecuentes</a>
                 <a href="#" id="menuGallery">Galería</a>
-                <a href="#footer" id="menuContact">Contáctanos</a>
+                <a href="#" id="menuTerminos">Términos y condiciones</a> <a href="#footer" id="menuContact">Contáctanos</a>
             </nav>
             <div class="hero-content">
                 <div class="brand">
@@ -525,6 +508,59 @@
         </div>
     </div>
 
+    <div class="contrato-modal" id="terminosModal">
+        <div class="contrato-box">
+            <h3>Términos y Condiciones</h3>
+            <div style="color: var(--text-desc); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px;">
+                <p><strong style="color: var(--gold-main);">1. Diagnóstico:</strong> Todo equipo entregado será  informado en el estado en que se recibe al momento de su recepción.</p>
+                <br>
+                <p><strong style="color: var(--gold-main);">2. Garantía:</strong> Cold Boot Systems ofrece 30 días de garantía en mano de obra y problemas unicamente por software, calentamiento, o similares (sujeto a evaluación previa). La garantía puede anularse por cualquiera de las siguientes razones:
+                    <br>
+                    <br>
+                    - software malicioso: aquel dispositivo alterado por un software malicioso descargado por un tecero. 
+                    <br>
+                    <br>
+                    - daño físico o derrames: cualquier daño fisico que se evalúe y no sea por parte de la empresa no entrará en garantia, así como tampoco derrames, problemas electrónicos, etc
+                    <br>
+                    <br>
+                    --dispositivo manipulado por terceros: si el dispositivo es manipulado por un tercero después de haber realizado el servicio con nosotros, la garantía quedará anulada.
+                    <br>
+                    <br>
+                    - si han pasado mas de 30 dias sin reclamar la garantía, posteriormente a ese tiempo no será válida.</p>
+                    <br>
+                <br>
+                <p><strong style="color: var(--gold-main);">3. Respaldo de Información:</strong> El cliente es responsable de sus archivos. No nos hacemos responsables por pérdida de sus archivos, datos, etc. se le sugiere hacer un respaldo de éstos mismos.</p>
+                <br>
+                <br>
+                <P><strong style="color: var(--gold-main);">4. Recuperación de archivos:</strong> el trabajo realizado no garantiza la recuperación total o parcial de sus archivos del disco duro, se evaluará el estado del disco y posteriormente se le informará si se pueden rescatar sus archivos dependiendo la gravedad del daño.</P>
+                <br>
+                <br>
+                <p><strong style="color: var(--gold-main);">5. Cláusula de entrega:</strong> el equipo se entregará únicamente al haber realizado el pago completo por el servicio, en caso contrario será retenido hasta realizar dicho pago.</p>
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--gold-main); margin-bottom: 15px; text-align: center; font-weight: bold;">Para confirmar tu acuerdo de manera oficial, ingresa tus datos:</p>
+            
+            <form id="formTerminos">
+                <div class="form-group">
+                    <label for="clienteNombre">Nombre completo</label>
+                    <input type="text" id="clienteNombre" required placeholder="Ej. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="clienteTel">WhatsApp de contacto</label>
+                    <input type="tel" id="clienteTel" required placeholder="Ej. 9991234567" pattern="[0-9]{10}" title="Ingresa tu número a 10 dígitos">
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="aceptoCheck" required>
+                    <label for="aceptoCheck">Acepto que he leído y estoy de acuerdo con los términos y condiciones.</label>
+                </div>
+                
+                <button type="submit" class="btn-submit" id="btnAceptarTerminos">Acepto los Términos</button>
+                <button type="button" class="close-contrato" id="closeTerminos">Cerrar</button>
+            </form>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         const toggleBtn = document.getElementById("theme-toggle");
@@ -549,58 +585,155 @@
         window.addEventListener("scroll", revealOnScroll);
         revealOnScroll();
 
-        particlesJS("particles-js", {
-            "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.3, "width": 1 }, "move": { "enable": true, "speed": 1.5 } },
-            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" } }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } } }
-        });
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS("particles-js", {
+                "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.3, "width": 1 }, "move": { "enable": true, "speed": 1.5 } },
+                "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" } }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } } } }
+            });
+        }
 
         const menuBtn = document.getElementById("menuBtn");
         const menu = document.getElementById("menu");
         const closeMenuBtn = document.getElementById("closeMenuBtn");
-        const menuServices = document.getElementById("menuServices");
-        const servicesModal = document.getElementById("servicesModal");
-        const closeServices = document.getElementById("closeServices");
-        const menuGallery = document.getElementById("menuGallery");
-        const galleryPage = document.getElementById("galleryPage");
-        const closeGallery = document.getElementById("closeGallery");
+        const menuLinks = document.querySelectorAll(".menu a:not(#menuFaq):not(#menuTerminos), .menu button:not(#menuServices)");
 
         function toggleMenu() { menu.classList.toggle("active"); }
         if (menuBtn) menuBtn.addEventListener("click", toggleMenu);
         if (closeMenuBtn) closeMenuBtn.addEventListener("click", () => menu.classList.remove("active"));
 
-        if (menuServices) menuServices.onclick = () => { menu.classList.remove("active"); servicesModal.classList.add("active"); };
-        if (closeServices) closeServices.onclick = () => servicesModal.classList.remove("active");
+        menuLinks.forEach(link => {
+            link.addEventListener("click", () => menu.classList.remove("active"));
+        });
 
-        if (menuGallery) menuGallery.onclick = (e) => { e.preventDefault(); menu.classList.remove("active"); galleryPage.classList.add("active"); };
-        if (closeGallery) closeGallery.onclick = () => galleryPage.classList.remove("active");
+        const menuServices = document.getElementById("menuServices");
+        const servicesModal = document.getElementById("servicesModal");
+        const closeServices = document.getElementById("closeServices");
 
-        const menuContact = document.getElementById("menuContact");
-        const footer = document.getElementById("footer");
-        if (menuContact && footer) menuContact.onclick = (e) => { e.preventDefault(); menu.classList.remove("active"); footer.scrollIntoView({behavior:"smooth"}); };
+        if (menuServices) {
+            menuServices.addEventListener("click", () => {
+                menu.classList.remove("active");
+                servicesModal.classList.add("active");
+            });
+        }
+        if (closeServices) closeServices.addEventListener("click", () => servicesModal.classList.remove("active"));
 
+        const menuGallery = document.getElementById("menuGallery");
+        const galleryPage = document.getElementById("galleryPage");
+        const closeGallery = document.getElementById("closeGallery");
+
+        if (menuGallery) {
+            menuGallery.addEventListener("click", (e) => {
+                e.preventDefault();
+                menu.classList.remove("active");
+                galleryPage.classList.add("active");
+            });
+        }
+        if (closeGallery) closeGallery.addEventListener("click", () => galleryPage.classList.remove("active"));
+        
         const menuFaq = document.getElementById("menuFaq");
         const faqSection = document.getElementById("faq");
         const faqItems = document.querySelectorAll(".faq-item");
 
         if (menuFaq && faqSection) {
-            menuFaq.onclick = (e) => {
+            menuFaq.addEventListener("click", (e) => {
                 e.preventDefault();
                 menu.classList.remove("active");
-                faqSection.classList.add("active"); 
-                setTimeout(() => faqSection.scrollIntoView({behavior:"smooth", block:"start"}), 100);
-            };
+                faqSection.classList.add("active");
+                setTimeout(() => { faqSection.scrollIntoView({ behavior: "smooth", block: "start" }); }, 100);
+            });
         }
 
         faqItems.forEach(item => {
-            const q = item.querySelector(".faq-question");
-            if (q) q.onclick = () => { 
-                faqItems.forEach(i => { if(i!==item) i.classList.remove("active"); });
-                item.classList.toggle("active"); 
-            };
+            const question = item.querySelector(".faq-question");
+            if (question) {
+                question.addEventListener("click", () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) otherItem.classList.remove("active");
+                    });
+                    item.classList.toggle("active");
+                });
+            }
+        });
+
+        const menuContact = document.getElementById("menuContact");
+        const footer = document.getElementById("footer");
+
+        if (menuContact && footer) {
+            menuContact.addEventListener("click", (e) => {
+                e.preventDefault();
+                menu.classList.remove("active");
+                footer.scrollIntoView({ behavior: "smooth" });
+            });
+        }
+
+        const SUPABASE_URL = 'https://almidqagfbducznvnbjf.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_qTk1_HbeclOQ5ljG0DaE8Q_h0w5BjcE';
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const menuTerminos = document.getElementById("menuTerminos");
+        const terminosModal = document.getElementById("terminosModal");
+        const closeTerminos = document.getElementById("closeTerminos");
+        const formTerminos = document.getElementById("formTerminos");
+
+        if (menuTerminos) {
+            menuTerminos.addEventListener("click", (e) => {
+                e.preventDefault();
+                menu.classList.remove("active"); 
+                terminosModal.classList.add("active"); 
+            });
+        }
+
+        if (closeTerminos) {
+            closeTerminos.addEventListener("click", () => {
+                terminosModal.classList.remove("active");
+                formTerminos.reset();
+            });
+        }
+
+        formTerminos.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btnSubmit = document.getElementById('btnAceptarTerminos');
+            btnSubmit.textContent = "Registrando firma...";
+            btnSubmit.disabled = true;
+
+            const nombre = document.getElementById('clienteNombre').value;
+            const tel = document.getElementById('clienteTel').value;
+            const { error } = await supabaseClient
+                .from('registros_aceptacion')
+                .insert([
+                    { 
+                        nombre_cliente: nombre, 
+                        whatsapp: tel,
+                        acepto_terminos: true,
+                        version_contrato: '1.0'
+                    }
+                ]);
+
+            if (error) {
+                console.error("Fallo la conexión:", error);
+                alert("Hubo un error de conexión. Por favor intenta de nuevo.");
+                btnSubmit.textContent = "Acepto los Términos";
+                btnSubmit.disabled = false;
+            } else {
+
+                const msjConfirmacion = `Hola Ing. Sebastián, soy ${nombre}. Acabo de leer y aceptar los Términos y Condiciones en la página web oficial.`;
+                window.open(`https://wa.me/522205338533?text=${encodeURIComponent(msjConfirmacion)}`, '_blank');
+                
+                formTerminos.reset();
+                terminosModal.classList.remove('active');
+                btnSubmit.textContent = "Acepto los Términos";
+                btnSubmit.disabled = false;
+            }
         });
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
