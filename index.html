@@ -737,7 +737,7 @@
                 btnSubmit.textContent = "Acepto los Términos";
                 btnSubmit.disabled = false;
             } else {
-                const msjConfirmacion = `Hola Ing. Sebastián, soy ${nombre}. Acabo de leer y aceptar los Términos y Condiciones en la página web oficial para el diagnóstico de mi equipo.`;
+                const msjConfirmacion = `Hola, soy ${nombre}. Acabo de leer y aceptar los Términos y Condiciones en la página web oficial para el diagnóstico de mi equipo.`;
                 window.open(`https://wa.me/522205338533?text=${encodeURIComponent(msjConfirmacion)}`, '_blank');
                 
                 formTerminos.reset();
@@ -750,6 +750,7 @@
     </script>
 </body>
 </html>
+
 
 
 
