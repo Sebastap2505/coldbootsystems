@@ -693,11 +693,24 @@
             e.preventDefault();
             
             const btnSubmit = document.getElementById('btnAceptarTerminos');
-            btnSubmit.textContent = "Registrando firma...";
+            btnSubmit.textContent = "Auditando y registrando..."; 
             btnSubmit.disabled = true;
 
             const nombre = document.getElementById('clienteNombre').value;
             const tel = document.getElementById('clienteTel').value;
+
+            let clientIp = "Desconocida";
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const ipData = await response.json();
+                clientIp = ipData.ip;
+            } catch (err) {
+                console.warn("No se pudo obtener la IP", err);
+                clientIp = "Bloqueada por firewall/adblock";
+            }
+            
+            const clientDevice = navigator.userAgent;
+
             const { error } = await supabaseClient
                 .from('registros_aceptacion')
                 .insert([
@@ -705,19 +718,18 @@
                         nombre_cliente: nombre, 
                         whatsapp: tel,
                         acepto_terminos: true,
-                        version_contrato: '1.0'
+                        version_contrato: '1.0',
+                        ip_address: clientIp,       
+                        device_info: clientDevice   
                     }
                 ]);
 
             if (error) {
                 console.error("Fallo la conexión:", error);
-                alert("Hubo un error de conexión. Por favor intenta de nuevo.");
+                alert("Hubo un error de conexión con el Búnker. Por favor intenta de nuevo.");
                 btnSubmit.textContent = "Acepto los Términos";
                 btnSubmit.disabled = false;
             } else {
-
-                const msjConfirmacion = `Hola Ing. Sebastián, soy ${nombre}. Acabo de leer y aceptar los Términos y Condiciones en la página web oficial.`;
-                window.open(`https://wa.me/522205338533?text=${encodeURIComponent(msjConfirmacion)}`, '_blank');
                 
                 formTerminos.reset();
                 terminosModal.classList.remove('active');
