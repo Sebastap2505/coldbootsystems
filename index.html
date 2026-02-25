@@ -82,6 +82,13 @@
         .badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--gold-main); color: #000; padding: 6px 20px; border-radius: 20px; font-weight: 800; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 5px 15px var(--gold-glow); white-space: nowrap; }
         .glass-card h3 { color: var(--text-light); font-size: 1.5rem; margin-top: 10px; margin-bottom: 10px; }
         .glass-card.popular h3 { color: var(--gold-main) !important; text-shadow: 0 0 10px var(--gold-glow); }
+        
+        /* --- ESTILOS PARA PRECIOS CON DESCUENTO --- */
+        .original-price { font-size: 1.1rem; color: #ff5555; text-decoration: line-through; font-weight: 600; font-family: 'Montserrat', sans-serif; margin-bottom: -5px; opacity: 0.8; transition: all 0.3s; }
+        .discount-badge { display: inline-block; background: #ff5555; color: white; font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; vertical-align: middle; margin-left: 10px; text-decoration: none !important; font-weight: 800; letter-spacing: 0.5px; }
+        body.light .original-price { color: #d32f2f; }
+        body.light .discount-badge { background: #d32f2f; }
+        
         .price { font-size: 2.2rem; font-weight: 900; font-family: 'Montserrat', sans-serif; color: var(--gold-main); margin-bottom: 10px; }
         .price span { font-size: 1rem; color: var(--text-desc); font-weight: 500; }
         .price small { font-size: 1.2rem; vertical-align: middle; color: var(--text-desc); font-weight: 500;}
@@ -307,7 +314,8 @@
                 
                 <div class="pricing-card glass-card">
                     <h3>Esencial</h3>
-                    <div class="price">Desde $600 <span>MXN</span></div>
+                    <div class="original-price"><s>$700 MXN</s> <span class="discount-badge">OFERTA</span></div>
+                    <div class="price">Desde $500 <span>MXN</span></div>
                     <p class="package-desc">Mantenimiento preventivo básico y esencial para alargar la vida de tu equipo.</p>
                     <ul>
                         <li>Limpieza interna profesional</li>
@@ -321,7 +329,8 @@
                 <div class="pricing-card glass-card popular">
                     <div class="badge">El Más Elegido</div>
                     <h3>Potenciador</h3>
-                    <div class="price">Desde $1,000 <span>MXN</span></div>
+                    <div class="original-price"><s>$1,000 MXN</s> <span class="discount-badge">APERTURA</span></div>
+                    <div class="price">Desde $800 <span>MXN</span></div>
                     <p class="package-desc">Solución integral para restaurar la velocidad. Tu equipo volverá a estar rápido.</p>
                     <ul>
                         <li>Todo lo del paquete esencial</li>
@@ -335,7 +344,8 @@
 
                 <div class="pricing-card glass-card">
                     <h3>SUPER RÁPIDO</h3>
-                    <div class="price">Desde $1,500+ <span>MXN</span></div>
+                    <div class="original-price"><s>$1,500+ MXN</s> <span class="discount-badge">OFERTA</span></div>
+                    <div class="price">Desde $1,300+ <span>MXN</span></div>
                     <p class="package-desc">Rendimiento máximo, tu equipo se sentirá como nuevo.</p>
                     <ul>
                         <li>Todo lo del paquete Potenciador</li>
@@ -707,7 +717,6 @@
             } catch (err) {
                 console.warn("ipify falló, intentando respaldo...");
                 try {
-
                     const resBackup = await fetch('https://ipapi.co/json/');
                     const dataBackup = await resBackup.json();
                     clientIp = dataBackup.ip;
@@ -750,6 +759,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
