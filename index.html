@@ -186,7 +186,13 @@
             .main-services-section h2 { margin-top: -35px !important; margin-bottom: 30px !important; }
             .business-hours { text-align: center !important; margin-top: 10px; margin-right: 0 !important; }
             * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-            .card, .glass-card, .menu, .hero-description, .tech-item, .individual-card, .menu-btn, .theme-btn { background: rgba(15, 15, 15, 0.98) !important; }
+            .card, .glass-card, .hero-description, .tech-item, .individual-card, .menu-btn, .theme-btn { background: rgba(15, 15, 15, 0.98) !important; }
+            .services-modal, .contrato-modal, .gallery-page { background: #050505 !important; }
+            .contrato-box, .services-box { background: #111111 !important; }
+            body.light .card, body.light .glass-card, body.light .hero-description, body.light .tech-item, body.light .individual-card, body.light .menu-btn, body.light .theme-btn { background: #252525 !important; }
+            body.light .menu { background: #1a1a1a !important; }
+            body.light .services-modal, body.light .contrato-modal, body.light .gallery-page { background: #050505 !important; }
+            body.light .contrato-box, body.light .services-box { background: #252525 !important; }
         }
 
         body.light { --bg-dark: #f4f4f4; --text-light: #111111; --text-desc: #444444; --border-glass: rgba(0, 0, 0, 0.1); --card-bg: rgba(255, 255, 255, 0.9); --gold-glow: rgba(212, 175, 55, 0.2); --hero-bg: rgba(255, 255, 255, 0.85); }
@@ -200,8 +206,8 @@
         body.light .comparison-title, body.light #faq h2 { color: #000000 !important; }
         body.light .map-container iframe { filter: none; -webkit-filter: none; }
         body.light .map-container { border: 1px solid #d4af37; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); background: #252525;}
-        body.light .menu { background: rgba(240, 240, 240, 0.95); border-right: 1px solid #ddd; }
-        body.light .menu a, body.light .menu button { color: #222; }
+        body.light .menu { background: rgba(20, 20, 20, 0.95); border-right: 1px solid rgba(255, 255, 255, 0.1); }
+        body.light .menu a, body.light .menu button { color: #ffffff; }
         body.light .menu a:hover { color: var(--gold-main); }
         body.light .gallery-page { background: #f4f4f4; }
         body.light .gallery-close { color: #000; }
@@ -212,9 +218,9 @@
         body.light .checkbox-group label { color: #444; }
         body.light .hours-text { color: #444444; }
 
-        body.light .services-modal, body.light .contrato-modal { background: rgba(240, 240, 240, 0.95) !important; }
-        body.light .services-box, body.light .contrato-box { background: #ffffff !important; border: 2px solid #d4af37 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; }
-        body.light .services-box *, body.light .contrato-box * { color: #222222 !important; }
+        body.light .services-modal, body.light .contrato-modal { background: rgba(5, 5, 5, 0.95) !important; }
+        body.light .services-box, body.light .contrato-box { background: #252525 !important; border: 1px solid #d4af37 !important; color: #ffffff !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important; }
+        body.light .services-box *, body.light .contrato-box * { color: #cccccc !important; }
         body.light .services-box h3, body.light .contrato-box h3, body.light .contrato-box strong { color: #d4af37 !important; }
     </style>
 </head>
@@ -735,6 +741,7 @@
     </script>
 </body>
 </html>
+
 
 
 
