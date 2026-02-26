@@ -25,7 +25,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: hidden; margin: 0; transition: background-color 0.3s, color 0.3s; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-light); overflow-x: clip; margin: 0; transition: background-color 0.3s, color 0.3s; }
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
         #main-content { position: relative; z-index: 2; width: 100%; }
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
@@ -44,7 +44,6 @@
         .brand-title { font-size: clamp(1.5rem, 4vw, 3rem) !important; line-height: 1 !important; margin: 0 !important; margin-top: 30px !important; margin-left: -35px !important; text-align: left !important; background: linear-gradient(180deg, #fff 20%, var(--gold-main) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.8)); }
         .brand-subtitle { font-family: 'Playfair Display', serif !important; font-style: italic; font-weight: 400; color: var(--gold-main); font-size: 1.2rem; text-transform: none; letter-spacing: 0.5px; margin-top: -10px !important; margin-bottom: 0; margin-left: -70px !important; animation: breathing 4s ease-in-out infinite; }
         @keyframes breathing { 0% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); } 50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); } 100% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 5px rgba(212, 175, 55, 0.2); } }
-
         .hero-description { width: 95% !important; max-width: 1400px !important; margin: -20px auto 50px !important; background: rgba(0, 0, 0, 0.3) !important; border: 1px solid rgba(212, 175, 55, 0.2) !important; backdrop-filter: blur(10px) !important; border-radius: 16px !important; color: #D1D1D1 !important; text-shadow: none !important; font-size: 1.15rem !important; line-height: 1.9 !important; padding: 40px 60px !important; box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important; transition: all 0.4s ease; font-family: 'Montserrat', sans-serif !important; font-weight: 600; text-align: justify !important; text-align-last: center !important; hyphens: none !important; -webkit-hyphens: none !important; -ms-hyphens: none !important; letter-spacing: -0.3px !important; }
         .hero-description:hover { color: #ffffff !important; border-color: #d4af37 !important; transform: translateY(-3px); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15) !important; }
         .tech-images { padding-top: 0; margin-top: -200px; position: relative; z-index: 10; padding-left: 5%; padding-right: 5%; }
@@ -75,20 +74,7 @@
         .discount-badge { display: inline-block; background: #ff5555; color: white; font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; vertical-align: middle; margin-left: 10px; text-decoration: none !important; font-weight: 800; letter-spacing: 0.5px; }
         body.light .original-price { color: #d32f2f; }
         body.light .discount-badge { background: #d32f2f; }
-
-        .promo-disclaimer {
-            width: 100%;
-            text-align: center;
-            color: var(--gold-main); 
-            font-weight: 600;        
-            font-size: 0.9rem;
-            margin-top: 40px;
-            font-style: italic;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 0.5px;
-            padding: 0 20px;
-        }
-        
+        .promo-disclaimer { width: 100%; text-align: center; color: var(--gold-main); font-weight: 600; font-size: 0.9rem; margin-top: 40px; font-style: italic; font-family: 'Montserrat', sans-serif; letter-spacing: 0.5px; padding: 0 20px; }
         .price { font-size: 2.2rem; font-weight: 900; font-family: 'Montserrat', sans-serif; color: var(--gold-main); margin-bottom: 10px; }
         .price span { font-size: 1rem; color: var(--text-desc); font-weight: 500; }
         .price small { font-size: 1.2rem; vertical-align: middle; color: var(--text-desc); font-weight: 500;}
@@ -138,11 +124,9 @@
         .socials img:hover { transform: scale(1.1); filter: invert(74%) sepia(60%) saturate(489%) hue-rotate(358deg) brightness(110%) contrast(92%) drop-shadow(0 0 8px var(--gold-main)); }
         .copyright { color: #444; font-size: 0.8rem; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
         .footer-right { flex: 1; display: flex; justify-content: flex-end; }
-        
         .business-hours { display: flex; flex-direction: column; text-align: right; gap: 5px; margin-right: 60px; }
         .hours-title { color: var(--gold-main); font-size: 0.85rem; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         .hours-text { color: #cccccc; font-size: 0.9rem; font-weight: 500; }
-
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--gold-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; }
         .services-modal, .gallery-page, .contrato-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .services-modal.active, .gallery-page.active, .contrato-modal.active { display: flex; }
@@ -201,22 +185,16 @@
             .extras-section h2 { margin-top: -65px !important; margin-bottom: 30px !important; }
             .main-services-section h2 { margin-top: -35px !important; margin-bottom: 30px !important; }
             .business-hours { text-align: center !important; margin-top: 10px; margin-right: 0 !important; }
+            * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+            .card, .glass-card, .menu, .hero-description, .tech-item, .individual-card, .menu-btn, .theme-btn { background: rgba(15, 15, 15, 0.98) !important; }
         }
 
-        body.light { 
-            --bg-dark: #f4f4f4; --text-light: #111111; --text-desc: #444444; 
-            --border-glass: rgba(0, 0, 0, 0.1); --card-bg: rgba(255, 255, 255, 0.9); 
-            --gold-glow: rgba(212, 175, 55, 0.2); --hero-bg: rgba(255, 255, 255, 0.85); 
-        }
-        
+        body.light { --bg-dark: #f4f4f4; --text-light: #111111; --text-desc: #444444; --border-glass: rgba(0, 0, 0, 0.1); --card-bg: rgba(255, 255, 255, 0.9); --gold-glow: rgba(212, 175, 55, 0.2); --hero-bg: rgba(255, 255, 255, 0.85); }
         body.light .brand-title { background: none !important; -webkit-text-fill-color: #1a1a1a !important; color: #1a1a1a !important; }
-        body.light .hero-description, body.light .card, body.light .faq-item, body.light .services-box, body.light .tech-item, body.light .glass-card, body.light .individual-card, body.light .contrato-box { 
-            background: #252525 !important; border: 1px solid #d4af37 !important; color: #ffffff !important; text-shadow: none !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important;
-        }
-
+        body.light .hero-description, body.light .card, body.light .faq-item, body.light .tech-item, body.light .glass-card, body.light .individual-card { background: #252525 !important; border: 1px solid #d4af37 !important; color: #ffffff !important; text-shadow: none !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important; }
         body.light .glass-card.popular { background: #1a1a1a !important; border: 2px solid #d4af37 !important; box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4) !important; }
-        body.light .hero-description, body.light .card h3, body.light .faq-question, body.light .services-box h3, body.light .glass-card h3, body.light .individual-info h3, body.light .contrato-box h3 { color: #d4af37 !important; }
-        body.light .card p, body.light .faq-answer, body.light .services-box ul li, body.light .glass-card ul li, body.light .individual-info p, body.light .package-desc { color: #cccccc !important; }
+        body.light .hero-description, body.light .card h3, body.light .faq-question, body.light .glass-card h3, body.light .individual-info h3 { color: #d4af37 !important; }
+        body.light .card p, body.light .faq-answer, body.light .glass-card ul li, body.light .individual-info p, body.light .package-desc { color: #cccccc !important; }
         body.light .price { color: #d4af37 !important; }
         body.light .price span, body.light .price small { color: #cccccc !important; }
         body.light .comparison-title, body.light #faq h2 { color: #000000 !important; }
@@ -233,6 +211,11 @@
         body.light .close-contrato:hover { background: #ddd; color: #000; }
         body.light .checkbox-group label { color: #444; }
         body.light .hours-text { color: #444444; }
+
+        body.light .services-modal, body.light .contrato-modal { background: rgba(240, 240, 240, 0.95) !important; }
+        body.light .services-box, body.light .contrato-box { background: #ffffff !important; border: 2px solid #d4af37 !important; box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; }
+        body.light .services-box *, body.light .contrato-box * { color: #222222 !important; }
+        body.light .services-box h3, body.light .contrato-box h3, body.light .contrato-box strong { color: #d4af37 !important; }
     </style>
 </head>
 
@@ -488,7 +471,7 @@
     <div class="services-modal" id="servicesModal">
         <div class="services-box">
             <h3>SERVICIOS</h3>
-            <ul style="color:#ccc; padding-left:20px; line-height:2; text-align:left;">
+            <ul style="color: var(--text-desc); padding-left:20px; line-height:2; text-align:left;">
                 <li>🔍 Diagnóstico completo del equipo</li>
                 <li>🧠 Revisión de encendido y rendimiento</li>
                 <li>🌡️ Control de temperatura</li>
@@ -752,6 +735,7 @@
     </script>
 </body>
 </html>
+
 
 
 
