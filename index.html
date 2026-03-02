@@ -134,9 +134,9 @@
         .services-box { text-align: center; }
         .contrato-box { max-height: 90vh; overflow-y: auto; text-align: left; }
         .services-box h3, .contrato-box h3 { color: var(--gold-main) !important; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; text-align: center; }
-        .gallery-page { background: var(--bg-dark); }
+        .gallery-page { background: var(--bg-dark); overflow-y: auto; align-items: flex-start; }
         .gallery-close { position: absolute; top: 30px; left: 30px; color: var(--text-light); cursor: pointer; border: none; background: none; z-index: 3001; font-size: 1.2rem; font-weight: bold; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 80px 20px; width: 100%; max-width: 1200px; overflow-y: auto; height: 100vh; align-content: start; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 80px 20px; width: 100%; max-width: 1200px; margin: 0 auto; align-content: start; }
         .gallery-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-glass); transition: all 0.3s ease; display: block; }
         .gallery-grid img:hover { transform: scale(1.05); border-color: var(--gold-main); box-shadow: 0 0 15px var(--gold-glow); z-index: 10; }
         .form-group { margin-bottom: 20px; }
@@ -222,6 +222,21 @@
         body.light .services-box, body.light .contrato-box { background: #252525 !important; border: 1px solid #d4af37 !important; color: #ffffff !important; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25) !important; }
         body.light .services-box *, body.light .contrato-box * { color: #cccccc !important; }
         body.light .services-box h3, body.light .contrato-box h3, body.light .contrato-box strong { color: #d4af37 !important; }
+
+        /* --- ESTILOS PERSONALIZADOS PARA EL SCROLLBAR --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-main); 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fff; 
+        }
     </style>
 </head>
 
@@ -494,11 +509,13 @@
     </div>
 
     <div class="gallery-page" id="galleryPage">
-        <button class="gallery-close" id="closeGallery">✕ VOLVER</button>
+        <button class="gallery-close" id="closeGallery">✕ SALIR</button>
         <div class="gallery-grid">
             <img src="img/ELEMENTOS.jpeg" alt="G1"><img src="img/LAPTOP_LIMPIEZA.jpeg" alt="G2">
             <img src="img/LAPTOP_FRENTE.png" alt="G3"><img src="img/COMPUTADORA_REVERSO.png" alt="G4">
             <img src="img/WIN_AZUL.png" alt="G5"><img src="img/BLACKWINDOWS.png" alt="G6">
+            <img src="img/LABORATORIO.png" alt="G7"><img src="img/LAPTOP_PHOTO.jpeg" alt="G8">
+            <img src="img/LAPTOP_BATERIA.png" alt="G9"><img src="img/DIELECTRICO_IZQUIERDA.jpeg" alt="G10">
         </div>
     </div>
 
@@ -741,6 +758,7 @@
     </script>
 </body>
 </html>
+
 
 
 
