@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* Dark "workshop" look is the default. Light is opt-in via data-theme="light". */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+@theme {
+  --color-primary: #f97316;
+  --color-primary-dark: #ea580c;
+  --color-primary-light: #fb923c;
+  --color-ink: #121417;
+  --color-surface: #1b1e22;
+  --color-whatsapp: #25d366;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --animate-marquee: marquee 26s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  html[data-theme="light"] {
+    color-scheme: light;
+  }
+  body {
+    @apply overflow-x-hidden bg-ink text-white transition-colors duration-300 light:bg-[#f2f1ed] light:text-slate-900;
+  }
+  h1, h2, h3 {
+    @apply font-display font-bold tracking-tight text-white light:text-slate-900;
+  }
+  section[id] {
+    scroll-margin-top: 84px;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto max-w-6xl px-6;
+  }
+
+  /* Blueprint grid texture */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(249, 115, 22, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(249, 115, 22, 0.08) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-bold tracking-wide whitespace-nowrap uppercase transition duration-300 cursor-pointer;
+  }
+  .btn-primary {
+    @apply bg-primary text-black shadow-lg shadow-primary/20 hover:-translate-y-0.5 hover:bg-primary-light hover:shadow-xl hover:shadow-primary/30;
+  }
+  .btn-outline {
+    @apply border-2 border-white/15 text-white hover:-translate-y-0.5 hover:border-primary hover:text-primary light:border-slate-300 light:text-slate-900;
+  }
+  .btn-whatsapp {
+    @apply bg-whatsapp text-white hover:-translate-y-0.5 hover:bg-[#1ebe57];
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-xl border border-white/10 bg-surface transition duration-300 light:border-slate-200 light:bg-white;
+  }
+
+  /* Reveal on scroll (toggled via IntersectionObserver in main.js) */
+  .reveal {
+    @apply opacity-0 translate-y-6 transition-all duration-700 ease-out;
+  }
+  .reveal.visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .nav-link {
+    @apply font-mono text-xs font-semibold tracking-wide text-white/70 uppercase transition hover:text-primary light:text-slate-600;
+  }
+
+  /* Header (JS toggles "scrolled" on scroll) */
+  .header {
+    @apply fixed inset-x-0 top-0 z-50 flex h-[76px] items-center border-b border-white/10 bg-ink/85 backdrop-blur-md transition-all duration-300 light:border-slate-200 light:bg-[#f2f1ed]/90;
+  }
+  .header.scrolled {
+    @apply shadow-lg shadow-black/20;
+  }
+
+  /* Mobile nav dropdown (JS toggles "active"); static row at lg: */
+  .nav-links {
+    @apply invisible fixed inset-x-0 top-[76px] z-40 flex -translate-y-3 flex-col items-stretch gap-0 border-b border-white/10 bg-ink px-6 pb-6 pt-2 opacity-0 shadow-xl transition-all duration-300 lg:visible lg:static lg:flex-row lg:items-center lg:gap-8 lg:border-none lg:bg-transparent lg:p-0 lg:opacity-100 lg:shadow-none lg:translate-y-0 light:bg-[#f2f1ed];
+  }
+  .nav-links.active {
+    @apply visible translate-y-0 opacity-100;
+  }
+
+  .hamburger span {
+    @apply block h-0.5 w-6 rounded-full bg-white transition light:bg-slate-900;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Modals (JS toggles "active") */
+  .modal {
+    @apply invisible fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 opacity-0 backdrop-blur-sm transition-all duration-300;
+  }
+  .modal.active {
+    @apply visible opacity-100;
+  }
+  .modal-box {
+    @apply max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl border border-white/10 bg-surface p-8 shadow-2xl light:border-slate-200 light:bg-white;
+  }
+
+  /* FAQ chevron (native <details>) */
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+";
+    @apply font-mono text-2xl leading-none text-primary transition-transform duration-300;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+
+  .marquee-track {
+    @apply flex w-max items-center gap-16 animate-marquee;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-white/15 bg-black/30 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/30 focus:border-primary light:border-slate-200 light:bg-white light:text-slate-900;
+  }
+
+  /* Eyebrow tag, spec-sheet style */
+  .tag {
+    @apply inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/10 px-3 py-1.5 font-mono text-xs font-semibold tracking-widest text-primary uppercase;
+  }
+  .tag::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-primary;
+  }
+}
